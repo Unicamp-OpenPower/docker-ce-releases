@@ -28,6 +28,7 @@ script:
   - cd ../../../
   - ls components/packaging/deb/debbuild/
   - ls components/packaging/rpm/rpmbuild/RPMS/ppc64le/
+  - sudo apt install lftp
   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R --continue --reverse --no-empty-dirs --no-perms components/packaging/deb/debbuild/ /ppc64el/docker/deb"
   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R --continue --reverse --no-empty-dirs --no-perms components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/rpm"
 #
