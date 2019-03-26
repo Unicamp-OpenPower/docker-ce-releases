@@ -1,3 +1,6 @@
+
+language: bash
+
 os: linux-ppc64le
 
 sudo: required
@@ -5,10 +8,13 @@ sudo: required
 services: docker
 
 script:
-  - wget https://github.com/docker/docker-ce/archive/v18.09.2.zip
-  - unzip v18.09.2.zip
-  - mv docker-ce-v18.09.2 docker-ce
-  - cd docker-ce
+  - git clone https://github.com/Unicamp-OpenPower/docker-ce
+  - cd ./docker-ce
+  - git checkout -t origin/v18.06.2-ce-ppc64le
+  - git config --local user.name "Unicamp OpenPower Lab"
+  - git config --local user.email "openpower@ic.unicamp.br" 
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
   - cd components/packaging/rpm
   - VERSION=18.06.2-ce make centos
   - cd ../../../
