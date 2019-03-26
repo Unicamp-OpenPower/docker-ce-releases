@@ -1,0 +1,20 @@
+os: linux-ppc64le
+
+sudo: required
+
+services: docker
+
+script:
+  - wget https://github.com/docker/docker-ce/archive/v18.09.2.zip
+  - unzip v18.09.2.zip
+  - mv docker-ce-v18.09.2 docker-ce
+  - cd docker-ce
+  - cd components/packaging/rpm
+  - VERSION=18.06.2-ce make centos
+  - cd ../../../
+  - cd components/packaging/deb
+  - VERSION=18.06.2-ce make ubuntu-xenial
+  - VERSION=18.06.2-ce make ubuntu-bionic 
+  - cd ../../../
+  - ls components/packaging/deb/debbuild/
+  - ls components/packaging/rpm/rpmbuild/RPMS/ppc64le/
