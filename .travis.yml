@@ -1,20 +1,16 @@
 matrix:
   include:
-    - env: version=18.09.4-rc1 build_version=18.09.4-rc1-ce
-    - env: version=18.09.3 build_version=18.09.3-rc1-ce
-    - env: version=18.09.3-rc1 build_version=18.09.3-rc1-ce
+    - env: version=18.09.3 build_version=18.09.3-ce
     - env: version=18.06.3-ce build_version=18.06.3-ce
     - env: version=18.09.2 build_version=18.09.2-ce
     - env: version=18.06.2-ce build_version=18.06.2-ce 
-    - env: version=18.09.1 build_version=18.09.1-ce
-    - env: version=18.09.1-rc1 build_version=18.09.1-rc1-ce
-    - env: version=18.09.1-beta2 build_version=18.09.1-beta2-ce
 
 os: linux-ppc64le
 sudo: required
 services: docker
 
 script:
+  - sudo apt install lftp
   - wget https://github.com/docker/docker-ce/archive/v$version.zip
   - unzip v$version.zip
   - mv docker-ce-$version docker-ce
@@ -22,15 +18,13 @@ script:
   - cd components/packaging/rpm
   - VERSION=$build_version make centos
   - cd ../../../
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/rpm/$version"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/rpm/$version"
   - cd components/packaging/deb
   - VERSION=$build_version make ubuntu-xenial
   - VERSION=$build_version make ubuntu-bionic 
   - cd ../../../
-  - ls components/packaging/deb/debbuild/ubuntu-bionic
-  - ls components/packaging/deb/debbuild/ubuntu-xenial
-  - ls components/packaging/rpm/rpmbuild/RPMS/ppc64le/
-  - sudo apt install lftp
   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/deb/$version"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/rpm/$version"
   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/ /ppc64el/docker/deb/$version"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/rpm/$version"
+
+ 
