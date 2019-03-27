@@ -1,9 +1,6 @@
 matrix:
   include:
-    - env: version=18.09.3 build_version=18.09.3-ce
-    - env: version=18.06.3-ce build_version=18.06.3-ce
-    - env: version=18.09.2 build_version=18.09.2-ce
-    - env: version=18.06.2-ce build_version=18.06.2-ce 
+    - env: version=18.09.0 build_version=18.09.0-ce
 
 os: linux-ppc64le
 sudo: required
