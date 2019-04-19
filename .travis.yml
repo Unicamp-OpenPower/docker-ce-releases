@@ -1,15 +1,9 @@
-matrix:
-  include:
-    - env: version=18.09.0 build_version=18.09.0-ce
-
 os: linux-ppc64le
 sudo: required
 services: docker
 
-install:
-  - sudo apt update
-  - sudo apt-get install lftp
-  - python3 ftp_version.py
-
 script:
-- bash build.sh
+  - git clone https://github.com/Unicamp-OpenPower/docker-ce
+  - cd ./docker-ce
+  - cd components/packaging/deb
+  - make deb
