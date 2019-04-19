@@ -10,4 +10,4 @@ script:
   - git clone https://github.com/docker/docker-ce.git
   - VERSION=18.09.0 make debian-stretch
   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/teste"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/ /ppc64el/docker/teste"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R debbuild/ /ppc64el/docker/teste"
