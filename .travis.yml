@@ -3,7 +3,7 @@ sudo: required
 services: docker
 
 script:
-  - apt install -y lftp
+  - sudo apt install -y lftp
   - git clone https://github.com/Unicamp-OpenPower/docker-ce
   - cd docker-ce
   - cd components/packaging/deb
