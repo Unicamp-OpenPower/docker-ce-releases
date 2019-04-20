@@ -30,5 +30,9 @@ script:
   - git clone https://github.com/Unicamp-OpenPower/docker-ce
   - cd docker-ce/components/packaging/deb
   - VERSION=$version make $sys
+  - ls
+  - cd debbuild
+  - ls
+  - cd ..
   - cd ../../../
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/ /ppc64el/docker/$version"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/debian-stretch /ppc64el/docker/$version"
