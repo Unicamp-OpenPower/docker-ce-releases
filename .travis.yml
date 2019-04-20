@@ -1,10 +1,5 @@
 matrix:
   include:
-  - env: version=18.09.4 sys=debian-stretch
-  - env: version=18.09.3 sys=debian-stretch
-  - env: version=18.09.2 sys=debian-stretch
-  - env: version=18.09.1 sys=debian-stretch
-  - env: version=18.09.0 sys=debian-stretch 
   - env: version=18.09.4 sys=ubuntu-xenial 
   - env: version=18.09.3 sys=ubuntu-xenial 
   - env: version=18.09.2 sys=ubuntu-xenial
@@ -35,4 +30,5 @@ script:
   - ls
   - cd ..
   - cd ../../../
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/debian-stretch /ppc64el/docker/$version"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir $sys"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/$sys /ppc64el/docker/$version/$sys"
