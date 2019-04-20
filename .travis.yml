@@ -30,5 +30,5 @@ script:
   - ls
   - cd ..
   - cd ../../../
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir $sys"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$version/$sys"
   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/$sys /ppc64el/docker/$version/$sys"
