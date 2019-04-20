@@ -1,10 +1,25 @@
 matrix:
   include:
-  - env: version=18.09.4
-  - env: version=18.09.3
-  - env: version=18.09.2
-  - env: version=18.09.1
-  - env: version=18.09.0
+  - env: version=18.09.4 sys=debian-stretch dir=deb
+  - env: version=18.09.3 sys=debian-stretch dir=deb
+  - env: version=18.09.2 sys=debian-stretch dir=deb
+  - env: version=18.09.1 sys=debian-stretch dir=deb
+  - env: version=18.09.0 sys=debian-stretch dir=deb
+  - env: version=18.09.4 sys=ubuntu-xenial dir=deb
+  - env: version=18.09.3 sys=ubuntu-xenial dir=deb
+  - env: version=18.09.2 sys=ubuntu-xenial dir=deb
+  - env: version=18.09.1 sys=ubuntu-xenial dir=deb
+  - env: version=18.09.0 sys=ubuntu-xenial dir=deb
+  - env: version=18.09.4 sys=ubuntu-bionic dir=deb
+  - env: version=18.09.3 sys=ubuntu-bionic dir=deb
+  - env: version=18.09.2 sys=ubuntu-bionic dir=deb
+  - env: version=18.09.1 sys=ubuntu-bionic dir=deb
+  - env: version=18.09.0 sys=ubuntu-bionic dir=deb
+  - env: version=18.09.4 sys=centos dir=rpm
+  - env: version=18.09.3 sys=centos dir=rpm
+  - env: version=18.09.2 sys=centos dir=rpm
+  - env: version=18.09.1 sys=centos dir=rpm
+  - env: version=18.09.0 sys=centos dir=rpm
 
 os: linux-ppc64le
 sudo: required
@@ -13,15 +28,7 @@ services: docker
 script:
   - sudo apt install -y lftp
   - git clone https://github.com/Unicamp-OpenPower/docker-ce
-  - cd docker-ce/components/packaging/deb
-  - VERSION=$version make debian-stretch
-  - VERSION=$version make ubuntu-xenial
-  - VERSION=$version make ubuntu-bionic
+  - cd docker-ce/components/packaging/$dir
+  - VERSION=$version make $sys
   - cd ../../../
-  - cd components/packaging/rpm
-  - VERSION=$version make centos
-  - cd ../../../
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/ /ppc64el/docker/$version"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/ubuntu-xenial/ /ppc64el/docker/$version"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/ubuntu-bionic/ /ppc64el/docker/$version"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/$version/centos-7"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/$dir/$sys/ /ppc64el/docker/$version"
