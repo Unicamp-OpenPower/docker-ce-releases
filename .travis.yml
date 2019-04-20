@@ -18,12 +18,10 @@ script:
   - VERSION=$version make ubuntu-xenial
   - VERSION=$version make ubuntu-bionic
   - cd ../../../
-  - cd docker-ce/components/packaging/rpm
+  - cd components/packaging/rpm
   - VERSION=$version make centos
   - cd ../../../
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$version"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$version/centos-7"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R docker-ce/components/packagin/deb/debbuild/ /ppc64el/docker/$version"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R docker-ce/components/packagin/deb/ubuntu-xenial/ /ppc64el/docker/$version"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R docker-ce/components/packagin/deb/ubuntu-bionic/ /ppc64el/docker/$version"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R docker-ce/components/packagin/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/$version/centos-7"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/ /ppc64el/docker/$version"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/ubuntu-xenial/ /ppc64el/docker/$version"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/ubuntu-bionic/ /ppc64el/docker/$version"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/$version/centos-7"
