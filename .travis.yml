@@ -1,20 +1,10 @@
 matrix:
   include:
-  - env: version=18.09.4 sys=ubuntu-xenial 
-  - env: version=18.09.3 sys=ubuntu-xenial 
-  - env: version=18.09.2 sys=ubuntu-xenial
-  - env: version=18.09.1 sys=ubuntu-xenial
-  - env: version=18.09.0 sys=ubuntu-xenial
-  - env: version=18.09.4 sys=ubuntu-bionic
-  - env: version=18.09.3 sys=ubuntu-bionic
-  - env: version=18.09.2 sys=ubuntu-bionic
-  - env: version=18.09.1 sys=ubuntu-bionic
-  - env: version=18.09.0 sys=ubuntu-bionic
-  #- env: version=18.09.4 sys=centos dir=rpm
-  #- env: version=18.09.3 sys=centos dir=rpm
-  #- env: version=18.09.2 sys=centos dir=rpm
-  #- env: version=18.09.1 sys=centos dir=rpm
-  #- env: version=18.09.0 sys=centos dir=rpm
+  - env: version=18.09.4
+  - env: version=18.09.3
+  - env: version=18.09.2
+  - env: version=18.09.1
+  - env: version=18.09.0
 
 os: linux-ppc64le
 sudo: required
@@ -23,12 +13,7 @@ services: docker
 script:
   - sudo apt install -y lftp
   - git clone https://github.com/Unicamp-OpenPower/docker-ce
-  - cd docker-ce/components/packaging/deb
-  - VERSION=$version make $sys
-  - ls
-  - cd debbuild
-  - ls
-  - cd ..
+  - cd docker-ce/components/packaging/rpm
+  - VERSION=$version make centos
   - cd ../../../
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$version/$sys"
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/$sys /ppc64el/docker/$version/$sys"
+  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/$version/centos-7"
