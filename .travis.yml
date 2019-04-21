@@ -1,19 +1,34 @@
 matrix:
   include:
-  - env: version=18.09.4
-  - env: version=18.09.3
-  - env: version=18.09.2
-  - env: version=18.09.1
-  - env: version=18.09.0
+  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debian-stretch/
+  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/ubuntu-xenial/
+  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/ubuntu-bionic/
+  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/ppc64le/
 
 os: linux-ppc64le
 sudo: required
 services: docker
 
 script:
-  - sudo apt install -y lftp
-  - git clone https://github.com/Unicamp-OpenPower/docker-ce
-  - cd docker-ce/components/packaging/rpm
-  - VERSION=$version make centos
-  - cd ../../../
-  - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/$version/centos-7"
+   - python3 ftp_version.py
+   - github_version=$(cat github_version.txt)
+   - ftp_version=$(cat ftp_version.txt)
+   - del_version=$(cat delete_version.txt)
+
+   - if [ $github_version != $ftp_version ]
+   - then
+      - sudo apt install -y lftp
+      - wget https://github.com/docker/docker-ce/archive/v$github_version.zip
+      - unzip v$github_version.zip
+      - mv docker-ce-$github_version docker-ce
+      - cd $dir
+      - VERSION=$build_version make $sys
+      - cd ../../../../
+      - if [[ $github_version > $ftp_version ]]
+      - then
+          # COLOCAR LATEST        
+      - fi
+      - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$github_version"
+      - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/$github_version"
+      # colocar remocao de antigos
+   - fi
