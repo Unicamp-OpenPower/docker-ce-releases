@@ -12,7 +12,7 @@ file.close()
 # find and save the current Docker version on FTP server
 html = str(
              requests.get(
-                        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/deb'
+                        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker'
                         ).content)
 index = html.rfind('version-')
 ftp_version = html[index + 8:index + 15]
