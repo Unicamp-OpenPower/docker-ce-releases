@@ -26,3 +26,10 @@ delete = html[index + 8:index + 15]
 file = open('delete_version.txt', 'w')
 file.writelines(delete)
 file.close()
+
+# find and save the oldest Bazel version on FTP server
+index = html.find('ddddw')
+file = open('create_dir.txt', 'w')
+file.writelines(str(index))
+file.close()
+
