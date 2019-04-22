@@ -1,9 +1,9 @@
-matrix:
-  include:
-  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debian-stretch/
-  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/ubuntu-xenial/
-  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/ubuntu-bionic/
-  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/ppc64le/
+#matrix:
+#  include:
+#  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debian-stretch/
+#  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/ubuntu-xenial/
+#  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/ubuntu-bionic/
+#  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/ppc64le/
 
 os: linux-ppc64le
 sudo: required
@@ -18,8 +18,9 @@ script:
    - wget https://github.com/docker/docker-ce/archive/v$github_version.zip
    - unzip v$github_version.zip
    - mv docker-ce-$github_version docker-ce
-   - cd $dir
-   - VERSION=$build_version make $sys
+   - cd docker-ce/components/packaging/deb
+   - echo $build_version
+   - VERSION=$build_version make debian-stretch
    - cd ../../../../
    - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/version-$github_version"
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/version-$github_version"
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R docker-ce/components/packaging/deb/debian-stretch/ /ppc64el/docker/version-$github_version"
