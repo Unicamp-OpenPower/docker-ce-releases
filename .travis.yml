@@ -1,9 +1,9 @@
 matrix:
   include:
-  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/debian-stretch/
-  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-xenial/
-  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-bionic/
-  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/ppc64le/
+  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
+  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
+  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
+  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/
 
 os: linux-ppc64le
 sudo: required
@@ -20,6 +20,6 @@ script:
    - mv docker-ce-$github_version docker-ce
    - cd $dir
    - VERSION=$github_version make $sys
+   - if [[ $sys == centos ]] then mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
    - cd ../../../../
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$github_version"
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/$github_version" 
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/version-c$github_version" 
