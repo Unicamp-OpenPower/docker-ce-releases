@@ -27,6 +27,10 @@ script:
    - cd docker-ce/components/packaging/deb
    - ls
    - VERSION=$github_version make debian-stretch
+   - echo $sys
+   - echo $centos
+   - echo $sys = $centos
+   - echo $sys -eq $centos
    - if [ $sys = $centos ]; echo "ENTROU1"; then mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
    - if [ $github_version != $ftp_version ]; echo "ENTROU2"; then lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
    - cd ../../../../
