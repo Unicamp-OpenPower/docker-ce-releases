@@ -33,9 +33,9 @@ script:
    - echo $sys -eq $centos
    - if [ $sys = $centos ]; then echo "ENTROU1"; mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
    - if [ $github_version != $ftp_version ]; then echo "ENTROU2"; lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
-   - cd ../../../../
+   - cd ../../../
    - ls
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R docker-ce/components/packaging/deb/debbuild /ppc64el/docker/version-$github_version" 
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/debbuild/ /ppc64el/docker/version-$github_version" 
    - cd  docker-ce/components/packaging/deb/debbuild/
    - pwd
    - ls
