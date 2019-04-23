@@ -1,8 +1,8 @@
 matrix:
   include:
-  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=build-deb/
-  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=build-deb/
-  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=build-deb/
+  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=debbuild/
+  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=debbuild/
+  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=debbuild/
   - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=rpmbuild/RPMS/
 
 os: linux-ppc64le
