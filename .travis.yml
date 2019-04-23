@@ -1,9 +1,9 @@
 matrix:
   include:
-  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
- # - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
- # - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
- # - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/
+  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=build-deb/
+  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=build-deb/
+  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=build-deb/
+  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=rpmbuild/RPMS/
 
 os: linux-ppc64le
 sudo: required
@@ -13,29 +13,15 @@ script:
    - python3 ftp_version.py
    - github_version=$(cat github_version.txt)
    - ftp_version=$(cat ftp_version.txt)
-   - del_version=$(cat delete_version.txt)
-   - echo $github_version 
-   - echo $ftp_version 
-   - echo $dir
-   - ls
-   - pwd
-   - centos=centos
    - sudo apt install -y lftp
    - wget https://github.com/docker/docker-ce/archive/v$github_version.zip
    - unzip v$github_version.zip
    - mv docker-ce-$github_version docker-ce
-   - cd docker-ce/components/packaging/deb
-   - ls
-   - VERSION=$github_version make debian-stretch
-   - echo $sys
-   - echo $centos
-   - echo $sys = $centos
-   - echo $sys -eq $centos
-   - if [ $sys = $centos ]; then echo "ENTROU1"; mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
-   - if [ $github_version != $ftp_version ]; then echo "ENTROU2"; lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
-   - cd ../../../
-   - ls
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/build-deb /ppc64el/docker/version-$github_version" 
-   - cd  docker-ce/components/packaging/deb/build-deb
+   - cd $dir
+   - VERSION=$github_version make $sys
    - pwd
    - ls
+   - if [ $sys = "centos" ]; then echo "ENTROU1"; mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
+   - if [ $github_version != $ftp_version ]; then echo "ENTROU2"; lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
+   - ls
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/version-$github_version" 
