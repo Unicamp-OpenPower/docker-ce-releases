@@ -21,7 +21,7 @@ script:
    - mv docker-ce-$github_version docker-ce
    - cd $dir
    - VERSION=$github_version make $sys
-   - if [[ $sys == "centos" ]]; then mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7 fi
-   - if [[ $create_dir > -1 ]]; then lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/version-$github_version" fi
+   - if [ $sys = "centos" ]; then mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
+   - if [ $create_dir > "-1" ]; then lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/version-$github_version"; fi
    - cd ../../../../
    - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/version-$github_version" 
