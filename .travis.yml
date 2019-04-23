@@ -35,7 +35,7 @@ script:
    - if [ $github_version != $ftp_version ]; then echo "ENTROU2"; lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
    - cd ../../../
    - ls
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/debbuild/ /ppc64el/docker/version-$github_version" 
-   - cd  docker-ce/components/packaging/debbuild/
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/build-deb /ppc64el/docker/version-$github_version" 
+   - cd  docker-ce/components/packaging/deb/build-deb
    - pwd
    - ls
