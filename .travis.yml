@@ -1,9 +1,9 @@
 matrix:
   include:
   - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
-  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
-  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
-  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/
+ # - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
+ # - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=docker-ce/components/packaging/deb/debbuild/
+ # - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/
 
 os: linux-ppc64le
 sudo: required
@@ -14,14 +14,23 @@ script:
    - github_version=$(cat github_version.txt)
    - ftp_version=$(cat ftp_version.txt)
    - del_version=$(cat delete_version.txt)
+   - echo $github_version 
+   - echo $ftp_version 
+   - echo $dir
+   - ls
+   - pwd
    - centos=centos
    - sudo apt install -y lftp
    - wget https://github.com/docker/docker-ce/archive/v$github_version.zip
    - unzip v$github_version.zip
    - mv docker-ce-$github_version docker-ce
-   - cd $dir
-   - VERSION=$github_version make $sys
-   - if [ $sys = $centos ]; then mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
-   - if [ $github_version != $ftp_version ]; then lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
+   - cd docker-ce/components/packaging/deb
+   - ls
+   - VERSION=$github_version make debian-stretch
+   - if [ $sys = $centos ]; echo "ENTROU1"; then mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
+   - if [ $github_version != $ftp_version ]; echo "ENTROU2"; then lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
    - cd ../../../../
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/version-$github_version" 
+   - ls
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R docker-ce/components/packaging/deb/debbuild/ /ppc64el/docker/version-$github_version" 
+   - cd  docker-ce/components/packaging/deb/debbuild/
+   - ls
