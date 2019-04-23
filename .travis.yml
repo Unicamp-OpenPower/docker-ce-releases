@@ -20,8 +20,6 @@ script:
    - cd $dir
    - VERSION=$github_version make $sys
    - pwd
-   - ls
    - if [ $sys = "centos" ]; then echo "ENTROU1"; mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
    - if [ $github_version != $ftp_version ]; then echo "ENTROU2"; lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
-   - ls
    - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/version-$github_version" 
