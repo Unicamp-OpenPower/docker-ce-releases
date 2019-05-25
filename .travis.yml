@@ -13,7 +13,7 @@ script:
    - sudo apt install -y lftp
    - wget https://github.com/docker/docker-ce/archive/v18.03.1-ce.zip
    - unzip v18.03.1-ce.zip
-   - mv docker-ce-18.03.1-ce.zip docker-ce
+   - mv docker-ce-18.03.1-ce docker-ce
    - cd $dir
    - VERSION=18.03.1-ce make $sys
    - if [ $sys = "centos" ]; mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
