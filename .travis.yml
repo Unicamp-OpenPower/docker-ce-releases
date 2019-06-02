@@ -15,12 +15,14 @@ script:
    - unzip v18.03.1-ce.zip
    - mv docker-ce-18.03.1-ce docker-ce
    - cd docker-ce/components/packaging/rpm
+   - cd centos-7
+   - mv Dockerfile.x86_64 Dockerfile.ppc64le
+   - cd ..
    - VERSION=18.03.1-ce make centos
    - mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7
    - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-18.03.1-ce"
    - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R rpmbuild/RPMS/ /ppc64el/docker/version-18.03.1-ce" 
-
-
+   
 
 #   - python3 ftp_version.py
 #   - github_version=$(cat github_version.txt)
