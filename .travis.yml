@@ -1,9 +1,9 @@
-matrix:
-  include:
-  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=debbuild/
-  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=debbuild/
-  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=debbuild/
-  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=rpmbuild/RPMS/
+#matrix:
+#  include:
+#  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=debbuild/
+#  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=debbuild/
+#  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=debbuild/
+#  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=rpmbuild/RPMS/
 
 os: linux-ppc64le
 sudo: required
@@ -14,11 +14,11 @@ script:
    - wget https://github.com/docker/docker-ce/archive/v18.03.1-ce.zip
    - unzip v18.03.1-ce.zip
    - mv docker-ce-18.03.1-ce docker-ce
-   - cd $dir
-   - VERSION=18.03.1-ce make $sys
-   - if [ $sys = "centos" ]; mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
-   - if [ $github_version != $ftp_version ]; lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/version-$github_version" 
+   - cd docker-ce/components/packaging/rpm
+   - VERSION=18.03.1-ce make centos
+   - mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-18.03.1-ce"
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R rpmbuild/RPMS/ /ppc64el/docker/version-18.03.1-ce" 
 
 
 
