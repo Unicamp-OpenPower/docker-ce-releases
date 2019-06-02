@@ -15,10 +15,12 @@ script:
    - unzip v18.03.1-ce.zip
    - mv docker-ce-18.03.1-ce docker-ce
    - cd docker-ce/components/packaging/rpm
+   - pwd
    - cd centos-7
    - mv Dockerfile.x86_64 Dockerfile.ppc64le
    - cd ..
-   - VERSION=18.03.1-ce make centos ppc64le
+   - make centos
+   - make ENGINE_DIR=/path/to/engine CLI_DIR=/path/to/cli fedora
    
    - cd rpmbuild/RPMS/
    - ls
