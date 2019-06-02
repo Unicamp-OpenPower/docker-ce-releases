@@ -19,8 +19,12 @@ script:
    - mv Dockerfile.x86_64 Dockerfile.ppc64le
    - cd ..
    - VERSION=18.03.1-ce make centos
-   - mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-18.03.1-ce"
+   
+   - cd rpmbuild/RPMS/
+   - ls
+   - cd ../..
+
+   - mv rpmbuild/RPMS/92f39ea4422e rpmbuild/RPMS/centos-7
    - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R rpmbuild/RPMS/ /ppc64el/docker/version-18.03.1-ce" 
    
 
