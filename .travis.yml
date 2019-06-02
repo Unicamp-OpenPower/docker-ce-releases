@@ -19,8 +19,7 @@ script:
    - cd centos-7
    - mv Dockerfile.x86_64 Dockerfile.ppc64le
    - cd ..
-   - make centos
-   - make ENGINE_DIR=/path/to/engine CLI_DIR=/path/to/cli fedora
+   - make ENGINE_DIR=/home/travis/build/Unicamp-OpenPower/docker-ce-releases/docker-ce CLI_DIR=/home/travis/build/Unicamp-OpenPower/docker-ce-releases/docker-ce/components/cli centos
    
    - cd rpmbuild/RPMS/
    - ls
