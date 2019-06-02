@@ -18,7 +18,7 @@ script:
    - cd centos-7
    - mv Dockerfile.x86_64 Dockerfile.ppc64le
    - cd ..
-   - VERSION=18.03.1-ce make -f centos-7/Dockerfile.ppc64le ppc64le
+   - VERSION=18.03.1-ce make centos ppc64le
    
    - cd rpmbuild/RPMS/
    - ls
