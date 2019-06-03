@@ -19,16 +19,16 @@ script:
    - cd centos-7
    - mv Dockerfile.x86_64 Dockerfile.ppc64le
    - cd ..
-   - make ENGINE_DIR=/home/travis/build/Unicamp-OpenPower/docker-ce-releases/docker-ce CLI_DIR=/home/travis/build/Unicamp-OpenPower/docker-ce-releases/docker-ce/components/cli centos
+   - VERSION=$github_version DISABLE_WARN_OUTSIDE_CONTAINER=1 make centos
    
-   - cd rpmbuild/RPMS/
+   - cd rpmbuild/
    - ls
-   - cd ../..
+   - cd ..
    
    - ls
 
-   - mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R rpmbuild/RPMS/ /ppc64el/docker/version-18.03.1-ce" 
+   #- mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R rpmbuild/ /ppc64el/docker/version-18.03.1-ce" 
    
 
 #   - python3 ftp_version.py
