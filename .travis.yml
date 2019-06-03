@@ -14,7 +14,7 @@ script:
    - git clone https://github.com/docker/docker-ce
    - cd docker-ce
    - git checkout v18.03.1-ce
-   - make VERSION=$github_version rpm
+   - make VERSION=18.03.1-ce rpm
    - cd components/packaging/rpm/rpmbuild/RPMS/
    - ls
    - cd ..
