@@ -11,24 +11,17 @@ services: docker
 
 script:
    - sudo apt install -y lftp
-   - wget https://github.com/docker/docker-ce/archive/v18.03.1-ce.zip
-   - unzip v18.03.1-ce.zip
-   - mv docker-ce-18.03.1-ce docker-ce
-   - cd docker-ce/components/packaging/rpm
-   - pwd
-   - cd centos-7
-   - mv Dockerfile.x86_64 Dockerfile.ppc64le
-   - cd ..
-   - VERSION=$github_version DISABLE_WARN_OUTSIDE_CONTAINER=1 make centos
-   
-   - cd rpmbuild/
+   - git clone https://github.com/docker/docker-ce
+   - cd docker-ce
+   - git checkout v18.03.1-ce
+   - make VERSION=$github_version rpm
+   - cd components/packaging/rpm/rpmbuild/RPMS/
    - ls
    - cd ..
-   
    - ls
 
    #- mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R rpmbuild/ /ppc64el/docker/version-18.03.1-ce" 
+   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R RPMS/ /ppc64el/docker/version-18.03.1-ce" 
    
 
 #   - python3 ftp_version.py
