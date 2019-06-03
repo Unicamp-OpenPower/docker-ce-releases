@@ -24,6 +24,8 @@ script:
    - cd rpmbuild/RPMS/
    - ls
    - cd ../..
+   
+   - ls
 
    - mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7
    - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R rpmbuild/RPMS/ /ppc64el/docker/version-18.03.1-ce" 
