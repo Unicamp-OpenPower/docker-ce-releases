@@ -1,38 +1,7 @@
-#matrix:
-#  include:
-#  - env: sys=debian-stretch dir=docker-ce/components/packaging/deb bin_dir=debbuild/
-#  - env: sys=ubuntu-xenial dir=docker-ce/components/packaging/deb bin_dir=debbuild/
-#  - env: sys=ubuntu-bionic dir=docker-ce/components/packaging/deb bin_dir=debbuild/
-#  - env: sys=centos dir=docker-ce/components/packaging/rpm bin_dir=rpmbuild/RPMS/
-
 os: linux-ppc64le
 sudo: required
 services: docker
 
 script:
-   - sudo apt install -y lftp
-   - git clone https://github.com/docker/docker-ce
-   - cd docker-ce
-   - git checkout v18.03.1-ce
-   - make VERSION=18.03.1-ce rpm
-   - cd components/packaging/rpm/rpmbuild/RPMS/
-   - ls
-   - cd ..
-   - ls
-
-   #- mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7
-   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R RPMS/ /ppc64el/docker/version-18.03.1-ce" 
-   
-
-#   - python3 ftp_version.py
-#   - github_version=$(cat github_version.txt)
-#   - ftp_version=$(cat ftp_version.txt)
-#   - sudo apt install -y lftp
-#   - wget https://github.com/docker/docker-ce/archive/v$github_version.zip
-#   - unzip v$github_version.zip
-#   - mv docker-ce-$github_version docker-ce
-#   - cd $dir
-#   - VERSION=$github_version make $sys
-#   - if [ $sys = "centos" ]; mv rpmbuild/RPMS/ppc64le rpmbuild/RPMS/centos-7; fi
-#   - if [ $github_version != $ftp_version ]; lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; cd /ppc64el/docker/; mkdir version-$github_version"; fi
-#   - lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R $bin_dir /ppc64el/docker/version-$github_version" 
+  - python3 ftp_version.py
+  - bash build.sh
