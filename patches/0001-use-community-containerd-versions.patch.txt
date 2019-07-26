@@ -1,0 +1,40 @@
+From 9163ed09236f23cc18ce69fb3e33c53a7a5cb219 Mon Sep 17 00:00:00 2001
+From: Christy Norman <christy@linux.vnet.ibm.com>
+Date: Thu, 18 Jul 2019 16:28:17 -0400
+Subject: [PATCH] use community containerd versions
+
+Signed-off-by: Christy Norman <christy@linux.vnet.ibm.com>
+---
+ components/packaging/deb/common/control       | 2 +-
+ components/packaging/rpm/SPECS/docker-ce.spec | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/components/packaging/deb/common/control b/components/packaging/deb/common/control
+index 557ce6e..bda9682 100644
+--- a/components/packaging/deb/common/control
++++ b/components/packaging/deb/common/control
+@@ -16,7 +16,7 @@ Vcs-Git: git://github.com/docker/docker.git
+ 
+ Package: docker-ce
+ Architecture: linux-any
+-Depends: docker-ce-cli, containerd.io (>= 1.2.2-3), iptables, libseccomp2 (>= 2.3.0), ${shlibs:Depends}
++Depends: docker-ce-cli, containerd (>= 1.2), iptables, libseccomp2 (>= 2.3.0), ${shlibs:Depends}
+ Recommends: aufs-tools,
+             ca-certificates,
+             cgroupfs-mount | cgroup-lite,
+diff --git a/components/packaging/rpm/SPECS/docker-ce.spec b/components/packaging/rpm/SPECS/docker-ce.spec
+index fc6ae6d..f1b2898 100644
+--- a/components/packaging/rpm/SPECS/docker-ce.spec
++++ b/components/packaging/rpm/SPECS/docker-ce.spec
+@@ -20,7 +20,7 @@ Requires: libseccomp >= 2.3
+ Requires: systemd-units
+ Requires: iptables
+ Requires: libcgroup
+-Requires: containerd.io >= 1.2.2-3
++Requires: containerd >= 1.2.1
+ Requires: tar
+ Requires: xz
+ 
+-- 
+2.7.4
+
