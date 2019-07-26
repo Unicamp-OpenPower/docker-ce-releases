@@ -17,6 +17,7 @@ then
     VERSION=$build_version make ubuntu-xenial
     VERSION=$build_version make ubuntu-bionic  
     cd ../../../
+    
     if [[ $github_version > $ftp_version ]]
     then
         lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/rpm/latest/$github_version"
