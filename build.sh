@@ -9,6 +9,7 @@ then
     unzip v$github_version.zip
     mv docker-ce-$github_version docker-ce
     cd docker-ce
+    git apply --3way ../patches/*
     cd components/packaging/rpm
     VERSION=$build_version make centos
     cd ../../../
