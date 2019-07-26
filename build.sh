@@ -4,6 +4,7 @@ del_version=$(cat delete_version.txt)
 
 if [ $github_version != $ftp_version ]
 then
+    sudo apt install -y lftp
     wget https://github.com/docker/docker-ce/archive/v$github_version.zip
     unzip v$github_version.zip
     mv docker-ce-$github_version docker-ce
