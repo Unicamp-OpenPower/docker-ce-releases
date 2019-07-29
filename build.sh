@@ -10,9 +10,9 @@ then
     mv docker-ce-$github_version docker-ce
     cd docker-ce
     git apply --3way ../patches/*
-    make VERSION=19.03.1 CLI_DIR=/home/travis/build/Unicamp-OpenPower/docker-ce-releases/docker-ce/components/cli ENGINE_DIR=/home/travis/build/Unicamp-OpenPower/docker-ce-releases/docker-ce/components/engine -C /home/travis/build/Unicamp-OpenPower/docker-ce-releases/docker-ce/components/packaging static-linux
     #
     cd components/packaging/static/
+    make static-linux
     ls
     cd ../../../
     cd components/packaging/static/build
