@@ -20,17 +20,18 @@ then
     
     if [[ $github_version > $ftp_version ]]
     then
-        lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/rpm/latest/$github_version"
-        lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/rpm/latest/$github_version"
-        lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; rm /ppc64el/docker/rpm/latest/$ftp_version"
-        lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/deb/latest/$github_version"
-        lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/ /ppc64el/docker/deb/latest/$github_version"
-        lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; rm /ppc64el/docker/deb/latest/$ftp_version"
+
     fi
-    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/rpm/$github_version"
-    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/rpm/$github_version"
-    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; rm /ppc64el/docker/rpm/$ftp_version"
-    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/deb/$github_version"
-    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/ /ppc64el/docker/deb/$github_version"
-    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; rm /ppc64el/docker/deb/$ftp_version"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$github_version"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$github_version/centos-7"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$github_version/debian-stretch"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$github_version/ubuntu-bionic"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$github_version/debian-stretch"
+    
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/rpm/rpmbuild/RPMS/ppc64le/ /ppc64el/docker/$github_version"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/ubuntu-xenial /ppc64el/docker/$github_version/ubuntu-xenial"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/ubuntu-bionic /ppc64el/docker/$github_version/ubuntu-bionic"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/deb/debbuild/debian-stretch /ppc64el/docker/$github_version/debian-stretch"
+
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; rm /ppc64el/docker/$ftp_version"
 fi
