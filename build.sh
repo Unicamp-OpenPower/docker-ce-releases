@@ -20,7 +20,7 @@ then
     
     if [[ $github_version > $ftp_version ]]
     then
-
+        ls
     fi
     lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$github_version"
     lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/$github_version/centos-7"
