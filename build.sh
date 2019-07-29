@@ -11,11 +11,11 @@ then
     cd docker-ce
     git apply --3way ../patches/*
     cd components/packaging/rpm
-    VERSION=v$build_version make centos
+    make centos
     cd ../../../
     cd components/packaging/deb
-    VERSION=v$build_version make ubuntu-xenial
-    VERSION=v$build_version make ubuntu-bionic  
+    make ubuntu-xenial
+    make ubuntu-bionic  
     cd ../../../
     
     if [[ $github_version > $ftp_version ]]
