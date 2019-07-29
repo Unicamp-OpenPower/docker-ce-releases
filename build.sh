@@ -15,6 +15,12 @@ then
     cd components/packaging/static/
     ls
     cd ../../../
+    cd components/packaging/static/build
+    ls
+    cd ../../../../
+    cd components/packaging/static/build/linux
+    ls
+    cd ../../../../../
     #cd components/packaging/rpm
     #make centos
     #cd ../../../
@@ -28,7 +34,7 @@ then
     then
         ls
     fi
-    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/static/ /ppc64el/docker/version-$github_version"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/static/build/linux /ppc64el/docker/version-$github_version"
 
     #lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/version-$github_version"
     #lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/version-$github_version/centos-7"
