@@ -10,7 +10,7 @@ then
     mv docker-ce-$github_version docker-ce
     cd docker-ce
     git apply --3way ../patches/*
-    make static
+    make static-linux
     #
     cd components/packaging/static/
     ls
