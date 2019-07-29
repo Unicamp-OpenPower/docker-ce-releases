@@ -15,7 +15,8 @@ then
     cd ../../../
     cd components/packaging/deb
     make ubuntu-xenial
-    make ubuntu-bionic  
+    make ubuntu-bionic
+    make debian-stretch
     cd ../../../
     
     if [[ $github_version > $ftp_version ]]
