@@ -6,8 +6,8 @@ status=$(curl -s --head -w %{http_code} https://oplab9.parqtec.unicamp.br/pub/pp
 if [  $status == 404 ] 
 then
     sudo apt install -y lftp
-    
-    if [[ $sys == "debian-stretch" ]]
+    status=$(curl -s --head -w %{http_code} https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$github_version -o /dev/null)
+    if [[ $status == 404 ]]
     then
         lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/version-$github_version"
         #lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; rm /ppc64el/docker/$ftp_version"
