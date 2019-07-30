@@ -1,6 +1,8 @@
 os: linux-ppc64le
 sudo: required
 services: docker
+language: go
+go: "1.10.x"
 
 script:
   - python3 ftp_version.py
