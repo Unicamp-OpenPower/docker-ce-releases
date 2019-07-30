@@ -17,11 +17,12 @@ then
     unzip v$github_version.zip
     mv docker-ce-$github_version docker-ce
     cd docker-ce && git apply --3way ../patches/*
-    git apply --3way ../patches/*
     cd $dir
+    ls
     make $sys
     cd ../../../
     cd $bin_dir
+    ls
     
     #if [[ $github_version > $ftp_version ]]
     #then
