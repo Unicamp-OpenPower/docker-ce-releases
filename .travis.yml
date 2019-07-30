@@ -1,9 +1,9 @@
 matrix:
   include:
-  - env: sys=debian-stretch dir=components/packaging/deb ftp_dir=deb/debian-stretch bin_dir=components/packaging/deb/debbuild/debian-stretch/
-  - env: sys=ubuntu-xenial dir=components/packaging/deb ftp_dir=deb/ubuntu-xenial bin_dir=components/packaging/deb/debbuild/ubuntu-xenial/
-  - env: sys=ubuntu-bionic dir=components/packaging/deb ftp_dir=deb/ubuntu-bionic bin_dir=components/packaging/deb/debbuild/ubuntu-bionic/
-  - env: sys=centos dir=components/packaging/rpm ftp_dir=rpm bin_dir=components/packaging/rpm/rpmbuild/RPMS/ppc64le/
+  - env: sys=debian-stretch dir=components/packaging/deb ftp_dir=debian-stretch bin_dir=components/packaging/deb/debbuild/debian-stretch/
+  - env: sys=ubuntu-xenial dir=components/packaging/deb ftp_dir=ubuntu-xenial bin_dir=components/packaging/deb/debbuild/ubuntu-xenial/
+  - env: sys=ubuntu-bionic dir=components/packaging/deb ftp_dir=ubuntu-bionic bin_dir=components/packaging/deb/debbuild/ubuntu-bionic/
+  - env: sys=centos dir=components/packaging/rpm ftp_dir=/ bin_dir=components/packaging/rpm/rpmbuild/RPMS/ppc64le/
   
 os: linux-ppc64le
 sudo: required
