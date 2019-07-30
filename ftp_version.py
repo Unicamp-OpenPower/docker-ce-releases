@@ -9,6 +9,7 @@ file = open('github_version.txt', 'w')
 file.writelines(github_version)
 file.close()
 
+
 # find and save the current Docker version on FTP server
 html = str(
              requests.get(
