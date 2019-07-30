@@ -9,18 +9,11 @@ then
     unzip v$github_version.zip
     mv docker-ce-$github_version docker-ce
     cd docker-ce
-    git apply --3way ../patches/*
+    #git apply --3way ../patches/*
     #
     cd components/packaging/static/
     make static-linux
     ls
-    cd ../../../
-    cd components/packaging/static/build
-    ls
-    cd ../../../../
-    cd components/packaging/static/build/linux
-    ls
-    cd ../../../../../
     #cd components/packaging/rpm
     #make centos
     #cd ../../../
