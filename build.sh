@@ -11,8 +11,7 @@ then
     cd docker-ce
     #git apply --3way ../patches/*
     #
-    make help
-    make deb
+    make
     ls
     cd components/packaging/deb
     ls
