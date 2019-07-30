@@ -11,7 +11,7 @@ then
     cd docker-ce
     #git apply --3way ../patches/*
     #
-    make
+    make deb ubuntu-xenial
     ls
     cd components/packaging/deb
     ls
