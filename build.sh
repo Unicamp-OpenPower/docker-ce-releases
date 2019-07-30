@@ -11,8 +11,10 @@ then
     cd docker-ce
     #git apply --3way ../patches/*
     #
-    cd components/packaging/static/
-    make static-linux
+    make help
+    make deb
+    ls
+    cd components/packaging/deb
     ls
     #cd components/packaging/rpm
     #make centos
@@ -27,7 +29,7 @@ then
     then
         ls
     fi
-    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/static/build/linux /ppc64el/docker/version-$github_version"
+    #lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R components/packaging/static/build/linux /ppc64el/docker/version-$github_version"
 
     #lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/version-$github_version"
     #lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/version-$github_version/centos-7"
