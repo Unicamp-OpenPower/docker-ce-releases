@@ -10,19 +10,14 @@ then
     mv docker-ce-$github_version docker-ce
     cd docker-ce
     #git apply --3way ../patches/*
-    #
-    make deb ubuntu-bionic
-    ls
-    cd components/packaging/deb
-    ls
     #cd components/packaging/rpm
     #make centos
     #cd ../../../
-    #cd components/packaging/deb
+    cd components/packaging/deb
     #make ubuntu-xenial
-    #make ubuntu-bionic
+    make ubuntu-bionic
     #make debian-stretch
-    #cd ../../../
+    cd ../../../
     
     if [[ $github_version > $ftp_version ]]
     then
