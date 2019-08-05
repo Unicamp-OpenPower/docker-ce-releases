@@ -18,7 +18,7 @@ then
     mv docker-ce-$github_version docker-ce
     cd docker-ce && git apply --3way ../patches/*
     cd $dir
-    make $sys
+    VERSION=$github_version make $sys
     cd ../../../
     cd $bin_dir
     
