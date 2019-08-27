@@ -1,12 +1,4 @@
 #github_version=$(cat github_version.txt)
-#github_version="18.09.0"
-#github_version="18.09.1"
-#github_version="18.09.2"
-#github_version="18.09.3"
-#github_version="18.09.4"
-#github_version="18.09.5"
-#github_version="18.09.6"
-#github_version="18.09.7"
 github_version="18.09.7"
 ftp_version=$(cat ftp_version.txt)
 del_version=$(cat delete_version.txt)
@@ -19,7 +11,7 @@ then
     if [[ $status == 404 ]]
     then
         lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mkdir /ppc64el/docker/version-$github_version"
-        #lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; rm /ppc64el/docker/$ftp_version"
+        lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; rm /ppc64el/docker/$ftp_version"
     fi
     
     wget https://github.com/docker/docker-ce/archive/v$github_version.zip
