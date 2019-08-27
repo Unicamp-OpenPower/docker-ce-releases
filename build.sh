@@ -27,5 +27,5 @@ then
         
     #fi
     
-    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R ./ /ppc64el/docker/version-$github_version/$sys"
+    lftp -c "open -u $USER,$PASS ftp://oplab9.parqtec.unicamp.br; mirror -R /home/travis/build/ /ppc64el/docker/version-$github_version/$sys"
 fi
