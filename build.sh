@@ -19,8 +19,6 @@ then
     cd docker-ce && git apply --3way ../patches/*
     cd $dir
     VERSION=$github_version make $sys
-    cd ../../../
-    cd $bin_dir
     
     #if [[ $github_version > $ftp_version ]]
     #then
