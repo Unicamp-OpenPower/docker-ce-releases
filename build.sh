@@ -25,8 +25,8 @@ then
     wget https://github.com/docker/docker-ce/archive/v$github_version.zip
     unzip v$github_version.zip
     mv docker-ce-$github_version docker-ce
-    cd docker-ce && git apply --3way ../patches/*
-    cd $dir
+#    cd docker-ce && git apply --3way ../patches/*
+    cd docker-ce/$dir
     VERSION=$github_version make $sys
     cd ../../../
     cd $bin_dir
