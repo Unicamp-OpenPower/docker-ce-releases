@@ -41,7 +41,7 @@ then
     cd docker-ce && git apply --3way ../patches/*
     
     echo "VALIDACAO 8"
-    cd docker-ce/$dir
+    cd $dir
     
     echo "VALIDACAO 9"
     VERSION=$github_version make $sys
