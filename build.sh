@@ -1,5 +1,4 @@
-#github_version=$(cat github_version.txt)
-github_version="18.09.7"
+github_version=$(cat github_version.txt)
 ftp_version=$(cat ftp_version.txt)
 del_version=$(cat delete_version.txt)
 status=$(curl -s --head -w %{http_code} https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$github_version/$sys -o /dev/null)
