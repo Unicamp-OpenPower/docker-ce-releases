@@ -1,5 +1,5 @@
-ftp_path="ftp://oplab9.parqtec.unicamp.br/test/vinicius/docker"
-url="https://oplab9.parqtec.unicamp.br/pub/test/vinicius/docker"
+ftp_path="ftp://oplab9.parqtec.unicamp.br/ppc64el/docker"
+url="https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker"
 
 home_dir=$(pwd)
 git_ver=$(cat github_version.txt)
