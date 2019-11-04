@@ -1,13 +1,24 @@
 matrix:
   include:
-  - env: sys=debian-stretch dir=components/packaging/deb bin_dir=components/packaging/deb/debbuild/debian-stretch/
-  - env: sys=ubuntu-xenial dir=components/packaging/deb bin_dir=components/packaging/deb/debbuild/ubuntu-xenial/
-  - env: sys=ubuntu-bionic dir=components/packaging/deb bin_dir=components/packaging/deb/debbuild/ubuntu-bionic/
-  - env: sys=centos dir=components/packaging/rpm bin_dir=components/packaging/rpm/rpmbuild/RPMS/ppc64le
+  - env: 
+    - sys=debian-stretch 
+    - dir=docker-ce/components/packaging/deb 
+    - bin_dir=docker-ce/components/packaging/deb/debbuild/debian-stretch/
+  - env: 
+    - sys=ubuntu-xenial 
+    - dir=docker-ce/components/packaging/deb 
+    - bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-xenial/
+  - env: 
+    - sys=ubuntu-bionic 
+    - dir=docker-ce/components/packaging/deb 
+    - bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-bionic/
+  - env: 
+    - sys=centos 
+    - dir=docker-ce/components/packaging/rpm 
+    - bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/ppc64le
   
 os: linux-ppc64le
 sudo: required
-services: docker
 
 script:
   - python3 ftp_version.py
