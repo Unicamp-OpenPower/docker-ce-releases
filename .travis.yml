@@ -5,29 +5,46 @@ sudo: required
 matrix:
   include:
   - env: 
+    - git_ver=18.09.8
     - sys=debian-stretch 
     - dir=docker-ce/components/packaging/deb 
     - bin_dir=docker-ce/components/packaging/deb/debbuild/debian-stretch/
   - env: 
+    - git_ver=18.09.8
     - sys=ubuntu-xenial 
     - dir=docker-ce/components/packaging/deb 
     - bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-xenial/
   - env: 
+    - git_ver=18.09.8
     - sys=ubuntu-bionic 
     - dir=docker-ce/components/packaging/deb 
     - bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-bionic/
   - env: 
+    - git_ver=18.09.8
+    - sys=centos 
+    - dir=docker-ce/components/packaging/rpm 
+    - bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/ppc64le
+  - env: 
+    - git_ver=18.09.9
+    - sys=debian-stretch 
+    - dir=docker-ce/components/packaging/deb 
+    - bin_dir=docker-ce/components/packaging/deb/debbuild/debian-stretch/
+  - env: 
+    - git_ver=18.09.9
+    - sys=ubuntu-xenial 
+    - dir=docker-ce/components/packaging/deb 
+    - bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-xenial/
+  - env: 
+    - git_ver=18.09.9
+    - sys=ubuntu-bionic 
+    - dir=docker-ce/components/packaging/deb 
+    - bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-bionic/
+  - env: 
+    - git_ver=18.09.9
     - sys=centos 
     - dir=docker-ce/components/packaging/rpm 
     - bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/ppc64le
 
+
 script:
-  - python3 ftp_version.py
   - bash build.sh
-  
-notifications:
-  slack:
-    rooms:
-      - secure: "ag5H+Pepz+t1Wz8ObXkWEJZQ0Yx1d5sribA9YxmJLo9OWgRnfMF6vaCVA8QW/P3CXIIQmRWwx1CzepBXYwr2spPDvdcKHb0g33QSCKCtQmROeJ4dvsAPTWc1WULW0RXupvlBiAAf4dbYaEXtypbR6QB6OKv2K1s1Llb9NArVGt6oLTPIxm/bXWiJOBEkBOamA9dtOghn/mClFgL5N7HZ/mGMfIqOFvLgiYTOwmvBWt1KXwXLi0aObBYw3Q+bglCuBizr84R66jlUrkBmRi2gRopMC7Jnxxse2HSIitsxSDgmhMoC/RfdId0uA+4tpY0ytN0TofAEXwqQKJJfR7a2fnN00hCMyfFEbngBh0pwJpmzTe5Je5sM918+pKVLBiNBJ+CjY7lMFimYbfJxwk/RhAAW0FZuNUozhFy7XjP9RvxcNF9q9qIc4j1HJU4p5N8jkquQPUHvvlZmuhWKkFOXI4mi2WBzdIQKopOR9lPOUuUDzxZZgUfL/xRVtGyn8atB0CeC+xv6cONl/REfhOcDQGhquZ10WZ+4FT+Khpn2K4bNrJ1Tqv5SA7ADYxBxgLfrdXbGheMDV9us16wkf5HOkzleDLWCVBB/1cQsj39kI/VTUCpT7E1Q52zcOUkEJUzg/7H2CWfT77IRns84EEHUESm92uHFrc08w8lSAtdGUwc="
-    on_success: change
-    on_failure: always
