@@ -1,4 +1,4 @@
-import requests
+import urllib.request as request
 from re import findall
 
 # function get_info
@@ -10,7 +10,7 @@ from re import findall
 #   name  - Name of the text file to be written with the info
 #   cut -  funtion indicating what to keep from the regex pattern
 def get_info(path, regex, name, cut=(lambda x : x)):
-    html = str(requests.get(path).content)
+    html = str(request.urlopen(path).read())
     info = cut(max(findall(regex, html)+["0"]))
     file = open(name+'.txt', 'w')
     file.writelines(info)
