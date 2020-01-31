@@ -22,7 +22,7 @@ then
     echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
     git clone https://github.com/docker/docker-ce
     cd docker-ce && git checkout v$git_ver
-    git apply -v --3way ../patches/*
+    git am --3way ../patches/*
 
     echo "=========> [BUILDING <$sys> PACKAGES] >>>"
     cd $home_dir/$dir
