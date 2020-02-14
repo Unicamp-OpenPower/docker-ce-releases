@@ -26,7 +26,7 @@ then
 
     echo "=========> [BUILDING <$sys> PACKAGES] >>>"
     cd $home_dir/$dir
-    VERSION=$git_ver make $sys
+    sudo VERSION=$git_ver make $sys
 
     echo "=========> [SENDING PACKAGES TO FTP] >>>"
     cd $home_dir/$bin_dir
