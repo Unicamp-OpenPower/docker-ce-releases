@@ -32,7 +32,7 @@ then
     echo "=========> [SENDING PACKAGES TO FTP] >>>"
     cd $home_dir/$bin_dir
     lftp -c "open -u $USER,$PASS $ftp_path/version-$git_ver/$sys; mirror -R ./ ./"
-    rm -rf $home_dir/$bin_dir
+    sudo rm -rf $home_dir/$bin_dir
 
 fi
 
