@@ -30,7 +30,7 @@ then
 
     echo "=========> [SENDING PACKAGES TO FTP] >>>"
     cd $home_dir/$bin_dir
-    lftp -c "open -u $USER,$PASS $ftp_path/version-$git_ver/$sys; mirror -R ./ ./"
+    lftp -c "open -u $MY_USER,$MY_PASS $ftp_path/version-$git_ver/$sys; mirror -R ./ ./"
 
 fi
 
