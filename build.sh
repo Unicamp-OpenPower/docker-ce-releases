@@ -15,9 +15,9 @@ then
     sudo apt install -y lftp
     lftp -c "open -u $USER,$PASS $ftp_path; mkdir -p version-$git_ver/$sys"
 
-    echo "=========> [INSTALLING DOCKER] >>> "
-    git clone https://github.com/Unicamp-OpenPower/docker.git
-    sudo snap install docker
+    # echo "=========> [INSTALLING DOCKER] >>> "
+    # git clone https://github.com/Unicamp-OpenPower/docker.git
+    # sudo snap install docker
 
     echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
     git clone https://github.com/docker/docker-ce
