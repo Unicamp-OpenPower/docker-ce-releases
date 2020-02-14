@@ -1,3 +1,4 @@
+set -e
 ftp_path="ftp://oplab9.parqtec.unicamp.br/ppc64el/docker"
 url="https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker"
 
