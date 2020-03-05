@@ -12,9 +12,6 @@ status=$(curl -s --head -w %{http_code} $url/version-$git_ver/$sys -o /dev/null)
 if [ $status == 404 ] 
 then
 
-    echo "=========> [CREATING FTP FOLDER] >>> "
-    lftp -c "open -u $USER,$PASS $ftp_path; mkdir -p version-$git_ver/$sys"
-
     echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
     git clone https://github.com/docker/docker-ce
     cd docker-ce && git checkout v$git_ver
@@ -23,6 +20,9 @@ then
     echo "=========> [BUILDING <$sys> PACKAGES] >>>"
     cd $home_dir/$dir
     sudo VERSION=$git_ver make $sys
+
+    echo "=========> [CREATING FTP FOLDER] >>> "
+    lftp -c "open -u $USER,$PASS $ftp_path; mkdir -p version-$git_ver/$sys"
 
     echo "=========> [SENDING PACKAGES TO FTP] >>>"
     cd $home_dir/$bin_dir
