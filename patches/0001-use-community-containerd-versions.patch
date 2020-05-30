@@ -1,7 +1,7 @@
-From 82657a3e68df66510354d8ea310c89e4b43ca19f Mon Sep 17 00:00:00 2001
-From: Vinicius Espindola <vinicius.c.e@hotmail.com>
-Date: Sun, 3 Nov 2019 01:32:37 +0000
-Subject: [PATCH 1/1] use community containerd versions
+From 35d119fe6131e4aafed819ae1d788d14cabe4089 Mon Sep 17 00:00:00 2001
+From: Vinicius Espindola <vini.couto.e@gmail.com>
+Date: Sat, 30 May 2020 21:44:53 +0000
+Subject: [PATCH] use community containerd versions
 
 ---
  components/packaging/deb/common/control       | 2 +-
@@ -9,7 +9,7 @@ Subject: [PATCH 1/1] use community containerd versions
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/components/packaging/deb/common/control b/components/packaging/deb/common/control
-index aa0e943679..56bd1fa880 100644
+index a540fc20d0..efdae67ace 100644
 --- a/components/packaging/deb/common/control
 +++ b/components/packaging/deb/common/control
 @@ -27,7 +27,7 @@ Vcs-Git: git://github.com/docker/docker.git
@@ -18,16 +18,16 @@ index aa0e943679..56bd1fa880 100644
  Architecture: linux-any
 -Depends: docker-ce-cli, containerd.io (>= 1.2.2-3), iptables, libseccomp2 (>= 2.3.0), ${shlibs:Depends}
 +Depends: docker-ce-cli, containerd (>= 1.2), iptables, libseccomp2 (>= 2.3.0), ${shlibs:Depends}
- Recommends: aufs-tools,
+ Recommends: aufs-tools [amd64],
              ca-certificates,
              cgroupfs-mount | cgroup-lite,
 diff --git a/components/packaging/rpm/SPECS/docker-ce.spec b/components/packaging/rpm/SPECS/docker-ce.spec
-index 83e8ec767f..3dbf4af45c 100644
+index 5c82df3a02..5e4b60d4c3 100644
 --- a/components/packaging/rpm/SPECS/docker-ce.spec
 +++ b/components/packaging/rpm/SPECS/docker-ce.spec
-@@ -21,7 +21,7 @@ Requires: libseccomp >= 2.3
- Requires: systemd
+@@ -27,7 +27,7 @@ Requires: ( iptables or nftables )
  Requires: iptables
+ %endif
  Requires: libcgroup
 -Requires: containerd.io >= 1.2.2-3
 +Requires: containerd >= 1.2.1
@@ -36,5 +36,4 @@ index 83e8ec767f..3dbf4af45c 100644
  
 -- 
 2.17.1
-
 
