@@ -3,7 +3,7 @@ ftp_path="ftp://oplab9.parqtec.unicamp.br/ppc64el/docker"
 url="https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker"
 
 home_dir=$(pwd)
-git_ver="19.03.9"
+git_ver="19.03.10"
 ftp_ver=$(cat ftp_version.txt)
 # del_version=$(cat delete_version.txt)
 
