@@ -16,7 +16,7 @@ The script handles most of the details necessary for the build to be executed, t
 
 ### Necessary Specifications
 
-The build process will not be able to execute if there's less than 2GB in the host machine. Ensure thate there's at least 2 GigaBytes of avalable memory for the build process, a host with 4GB of ram should suffice.
+The build process will not be able to execute if there's less than 2GB in the host machine. Ensure thate there's at least 2 GigaBytes of avalable memory for the build process, a host with 4GB of RAM should suffice.
 
 ### Prerequisites
 
