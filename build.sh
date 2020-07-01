@@ -8,7 +8,10 @@ git_ver="19.03.11"
 echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
 git clone https://github.com/docker/docker-ce
 cd docker-ce && git checkout v$git_ver
-git am --3way ../patches/*
+git config --global user.name "Vinicius Espindola"
+git config --global user.email "vini.couto.e@gmail.com"
+python3 ../patch.py
+git add . && git commit -m "using community containerd versions"
 
 echo "=========> [BUILDING <$sys> PACKAGES] >>>"
 cd $home_dir/$dir
