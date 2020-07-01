@@ -3,7 +3,7 @@ ftp_path="ftp://oplab9.parqtec.unicamp.br/ppc64el/docker"
 url="https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker"
 
 home_dir=$(pwd)
-git_ver="19.03.11"
+git_ver="19.03.12"
 
 echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
 git clone https://github.com/docker/docker-ce
