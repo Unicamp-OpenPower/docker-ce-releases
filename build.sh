@@ -1,5 +1,7 @@
 set -e
 ftp_path="ftp://oplab9.parqtec.unicamp.br/ppc64el/docker"
+ftp_repo1="ftp://oplab9.parqtec.unicamp.br/repository/debian/ppc64el/docker"
+ftp_repo2="ftp://oplab9.parqtec.unicamp.br/repository/rpm/ppc64le/docker"
 url="https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker"
 
 home_dir=$(pwd)
@@ -8,8 +10,8 @@ ftp_ver=$(cat ftp_version.txt)
 # del_version=$(cat delete_version.txt)
 
 echo "=========> [CHECKING IF BUILD EXISTS] >>> "
-status=$(curl -s --head -w %{http_code} $url/version-$git_ver/$sys -o /dev/null) 
-if [ $status == 404 ] 
+status=$(curl -s --head -w %{http_code} $url/version-$git_ver/$sys -o /dev/null)
+if [ $status == 404 ]
 then
 
     echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
@@ -31,6 +33,28 @@ then
     cd $home_dir/$bin_dir
     lftp -c "open -u $USER,$PASS $ftp_path/version-$git_ver/$sys; mirror -R ./ ./"
     sudo rm -rf $home_dir/$bin_dir
+
+    if [ ${sys} == "ubuntu-bionic" ]
+    then
+      echo "=========> [SENDING PACKAGES TO REPOSITORY <$sys>] >>>"
+      mkdir upload; cd upload
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-bionic/docker-ce-cli_$git_ver~3-0~ubuntu-bionic_ppc64el.deb
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-bionic/docker-ce_$git_ver~3-0~ubuntu-bionic_ppc64el.deb
+      lftp -c "open -u $USER,$PASS $ftp_repo1; mirror -R ./ ./"
+      cd ..; rm -rf upload/
+    fi
+    if [ ${sys} == "centos" ]
+    then
+      echo "=========> [SENDING PACKAGES TO REPOSITORY <$sys>] >>>"
+      mkdir upload; cd upload
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-$git_ver-3.el7.ppc64le.rpm
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-$git_ver-3.el8.ppc64le.rpm
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-cli-$git_ver-3.el7.ppc64le.rpm
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-cli-$git_ver-3.el8.ppc64le.rpm
+      lftp -c "open -u $USER,$PASS $ftp_repo2; mirror -R ./ ./"
+      cd ..; rm -rf upload/
+    fi
+
 
 fi
 
