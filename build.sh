@@ -10,8 +10,7 @@ ftp_ver=$(cat ftp_version.txt)
 # del_version=$(cat delete_version.txt)
 
 echo "=========> [CHECKING IF BUILD EXISTS] >>> "
-status=$(curl -s --head -w %{http_code} $url/version-$git_ver/$sys -o /dev/null)
-if [ $status == 404 ]
+if [ $git_ver != $ftp_ver ]
 then
 
     echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
@@ -21,6 +20,7 @@ then
     git config --global user.email "vini.couto.e@gmail.com"
     python3 ../patch.py
     git add . && git commit -m "using community containerd versions"
+    sudo make static DOCKER_BUILD_PKGS=static-linux
 
     echo "=========> [BUILDING <$sys> PACKAGES] >>>"
     cd $home_dir/$dir

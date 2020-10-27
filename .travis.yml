@@ -4,27 +4,27 @@ sudo: required
 
 matrix:
   include:
-  - env: 
-    - sys=debian-stretch 
-    - dir=docker-ce/components/packaging/deb 
-    - bin_dir=docker-ce/components/packaging/deb/debbuild/debian-stretch/
-  - env: 
-    - sys=ubuntu-xenial 
-    - dir=docker-ce/components/packaging/deb 
-    - bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-xenial/
-  - env: 
-    - sys=ubuntu-bionic 
-    - dir=docker-ce/components/packaging/deb 
+  - env:
+    - sys=debian-buster
+    - dir=docker-ce/components/packaging/deb
+    - bin_dir=docker-ce/components/packaging/deb/debbuild/debian-buster/
+  - env:
+    - sys=ubuntu-bionic
+    - dir=docker-ce/components/packaging/deb
     - bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-bionic/
-  - env: 
-    - sys=centos 
-    - dir=docker-ce/components/packaging/rpm 
+  - env:
+    - sys=ubuntu-focal
+    - dir=docker-ce/components/packaging/deb
+    - bin_dir=docker-ce/components/packaging/deb/debbuild/ubuntu-focal/
+  - env:
+    - sys=centos
+    - dir=docker-ce/components/packaging/rpm
     - bin_dir=docker-ce/components/packaging/rpm/rpmbuild/RPMS/ppc64le
 
 script:
   - python3 ftp_version.py
   - bash build.sh
-  
+
 notifications:
   slack:
     rooms:
