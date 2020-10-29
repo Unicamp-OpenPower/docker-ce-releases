@@ -37,22 +37,28 @@ then
     if [ ${sys} == "ubuntu-bionic" ]
     then
       echo "=========> [SENDING PACKAGES TO REPOSITORY <$sys>] >>>"
-      mkdir upload; cd upload
+      cd $home_dir
+      mkdir upload
+      cd upload
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-bionic/docker-ce-cli_$git_ver~3-0~ubuntu-bionic_ppc64el.deb
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-bionic/docker-ce_$git_ver~3-0~ubuntu-bionic_ppc64el.deb
       lftp -c "open -u $USER,$PASS $ftp_repo1; mirror -R ./ ./"
-      cd ..; rm -rf upload/
+      cd ..
+      rm -rf upload/
     fi
     if [ ${sys} == "centos" ]
     then
       echo "=========> [SENDING PACKAGES TO REPOSITORY <$sys>] >>>"
-      mkdir upload; cd upload
+      cd $home_dir
+      mkdir upload
+      cd upload
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-$git_ver-3.el7.ppc64le.rpm
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-$git_ver-3.el8.ppc64le.rpm
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-cli-$git_ver-3.el7.ppc64le.rpm
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-cli-$git_ver-3.el8.ppc64le.rpm
       lftp -c "open -u $USER,$PASS $ftp_repo2; mirror -R ./ ./"
-      cd ..; rm -rf upload/
+      cd ..
+      rm -rf upload/
     fi
 
 
