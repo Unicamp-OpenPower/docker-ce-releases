@@ -45,13 +45,11 @@ then
     sudo cp -r scan-cli-plugin/* docker-ce-packaging/src/github.com/docker/scan-cli-plugin
 
     echo "=========> [BUILDING <$sys> PACKAGES] >>>"
-    cd $dir
-    sudo make $sys
-    cd $home_dir/$bin_dir
-    ls
-
     cd $home_dir/$dir
     sudo VERSION=$git_ver make $sys
+    cd $home_dir/$bin_dir
+    ls
+    cd $home_dir
 
     echo "=========> [CREATING FTP FOLDER] >>> "
     lftp -c "open -u $USER,$PASS $ftp_path; mkdir -p version-$git_ver/$sys"
