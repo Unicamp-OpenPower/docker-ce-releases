@@ -11,7 +11,7 @@ ftp_ver=$(cat ftp_version.txt)
 # del_version=$(cat delete_version.txt)
 
 echo "=========> [CHECKING IF BUILD EXISTS] >>> "
-if [ $git_ver != $ftp_ver ] && [ $git_ver == $ftp_ver ]
+if [ $git_ver != $ftp_ver ] && [ $git_ver == $moby_ver ]
 then
     
     echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
