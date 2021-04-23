@@ -27,13 +27,13 @@ then
     git clone https://github.com/docker/scan-cli-plugin.git
     git clone https://github.com/docker/docker-ce-packaging.git
 
-    cd cli
+    cd $home_dir/cli
     git checkout v$git_ver
-    cd ..
+    cd $home_dir
 
-    cd moby
+    cd $home_dir/moby
     git checkout v$git_ver
-    cd ..
+    cd $home_dir
 
     python3 patch.py
     mkdir -p docker-ce-packaging/src/github.com/docker/cli
@@ -47,7 +47,7 @@ then
     echo "=========> [BUILDING <$sys> PACKAGES] >>>"
     cd $dir
     sudo make $sys
-    cd && cd $bin_dir
+    cd $home_dir/$bin_dir
     ls
 
     cd $home_dir/$dir
