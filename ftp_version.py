@@ -22,10 +22,12 @@ def get_info(path, regex, name, cut=(lambda x : x)):
 
 # Define the FTP URL for downloading and uploading packages
 ftp_path = 'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker'
-git_path = 'https://github.com/docker/docker-ce/releases/latest'
+git_path = 'https://github.com/docker/cli/releases/latest'
+moby_path = 'https://github.com/moby/moby/releases/latest'
 
 # find and save the current Github release
 get_info(git_path, 'v\d\d\.\d\d\.\d+', 'github_version', cut=(lambda x : x[1:]))
+get_info(moby_path, 'v\d\d\.\d\d\.\d+', 'moby_version', cut=(lambda x : x[1:]))
 
 # find and save the current Docker version on FTP server
 get_info(ftp_path, '\d\d\.\d\d\.\d+', 'ftp_version')
