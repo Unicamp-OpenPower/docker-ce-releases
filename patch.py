@@ -2,10 +2,10 @@ import re
 
 print("Running Patching Script...")
 
-deb_path = "components/packaging/deb/common/control"
+deb_path = "docker-ce-packaging/deb/common/control"
 deb_ver = "containerd (>= 1.2.1)"
 
-rpm_path = "components/packaging/rpm/SPECS/docker-ce.spec"
+rpm_path = "docker-ce-packaging/rpm/SPECS/docker-ce.spec"
 rpm_ver = "Requires: containerd >= 1.2.1"
 
 # Update debian containerd dependency
