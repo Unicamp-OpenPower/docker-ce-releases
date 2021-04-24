@@ -31,3 +31,41 @@ get_info(moby_path, 'v\d\d\.\d\d\.\d+', 'moby_version', cut=(lambda x : x[1:]))
 
 # find and save the current Docker version on FTP server
 get_info(ftp_path, '\d\d\.\d\d\.\d+', 'ftp_version')
+
+import requests
+
+# Find last version on FTP
+html = str(
+    requests.get(
+        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/'
+    ).content)
+index = html.rfind('version-')
+ftp_version = html[index + 8:index + 18].replace('<', '').replace(' ', '').replace('//', '')
+
+# Find if there are already the builds for each system
+html = str(
+    requests.get(
+        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-' + ftp_version 
+    ).content)
+
+# Create a file if there isn't a build
+if (not 'ubuntu-focal' in html):
+    file = open('ubuntu-focal.txt', 'w')
+    file.writelines(ftp_version)
+    file.close()
+if (not 'ubuntu-bionic' in html):
+    file = open('ubuntu-bionic.txt', 'w')
+    file.writelines(ftp_version)
+    file.close()
+if (not 'debian-buster' in html):
+    file = open('ubuntu-buster.txt', 'w')
+    file.writelines(ftp_version)
+    file.close()
+if (not 'centos-8' in html):
+    file = open('centos-8.txt', 'w')
+    file.writelines(ftp_version)
+    file.close()
+if (not 'centos-7' in html):
+    file = open('centos-7.txt', 'w')
+    file.writelines(ftp_version)
+    file.close()
