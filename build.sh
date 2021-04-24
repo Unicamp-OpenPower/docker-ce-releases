@@ -8,6 +8,10 @@ home_dir=$(pwd)
 git_ver=$(cat github_version.txt)
 moby_ver=$(cat moby_version.txt)
 ftp_ver=$(cat ftp_version.txt)
+
+git_ver="20.10.5"
+moby_ver="20.10.5"
+ftp_ver="20.10.4"
 # del_version=$(cat delete_version.txt)
 
 echo "=========> [CHECKING IF BUILD EXISTS] >>> "
@@ -15,15 +19,6 @@ if ([ $git_ver != $ftp_ver ] && [ $git_ver == $moby_ver ]) || [ -f "${sys}.txt" 
 then
     
     echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
-    #sudo apt-get -y install make
-    #sudo printf "deb https://oplab9.parqtec.unicamp.br/pub/repository/debian/ ./\n" >> /etc/apt/sources.list
-    #wget https://oplab9.parqtec.unicamp.br/pub/key/openpower-gpgkey-public.asc
-    #sudo apt-key add openpower-gpgkey-public.asc
-    #sudo apt-get update
-    #sudo apt-get -y install docker-ce
-
-    #git clone https://github.com/docker/cli.git
-    #git clone https://github.com/moby/moby.git
     git clone https://github.com/docker/scan-cli-plugin.git
     git clone https://github.com/docker/docker-ce-packaging.git
     
@@ -38,14 +33,6 @@ then
 
     mv cli-$git_ver cli
     mv moby-$git_ver moby
-
-    #cd $home_dir/cli
-    #git checkout v$git_ver
-    #cd $home_dir
-
-    #cd $home_dir/moby
-    #git checkout v$git_ver
-    #cd $home_dir
 
     python3 patch.py
     mkdir -p docker-ce-packaging/src/github.com/docker/cli
