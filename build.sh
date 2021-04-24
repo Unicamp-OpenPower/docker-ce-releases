@@ -22,18 +22,27 @@ then
     #sudo apt-get update
     #sudo apt-get -y install docker-ce
 
-    git clone https://github.com/docker/cli.git
-    git clone https://github.com/moby/moby.git
+    #git clone https://github.com/docker/cli.git
+    #git clone https://github.com/moby/moby.git
     git clone https://github.com/docker/scan-cli-plugin.git
     git clone https://github.com/docker/docker-ce-packaging.git
+    
+    wget https://github.com/docker/cli/archive/refs/tags/v$git_ver.zip
+    wget https://github.com/moby/moby/archive/refs/tags/v$git_ver.zip
 
-    cd $home_dir/cli
-    git checkout v$git_ver
-    cd $home_dir
+    unzip cli-$git_ver.zip
+    unzip moby-$git_ver.zip
 
-    cd $home_dir/moby
-    git checkout v$git_ver
-    cd $home_dir
+    mv cli-$git_ver cli
+    mv moby-$git_ver moby
+
+    #cd $home_dir/cli
+    #git checkout v$git_ver
+    #cd $home_dir
+
+    #cd $home_dir/moby
+    #git checkout v$git_ver
+    #cd $home_dir
 
     python3 patch.py
     mkdir -p docker-ce-packaging/src/github.com/docker/cli
@@ -77,8 +86,8 @@ then
       cd $home_dir
       mkdir upload
       cd upload
-      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-$git_ver-3.el7.ppc64le.rpm
-      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-cli-$git_ver-3.el7.ppc64le.rpm
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-7/docker-ce-$git_ver-3.el7.ppc64le.rpm
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-7/docker-ce-cli-$git_ver-3.el7.ppc64le.rpm
       lftp -c "open -u $USER,$PASS $ftp_repo2; mirror -R ./ ./"
       cd ..
       rm -rf upload/
@@ -89,8 +98,8 @@ then
       cd $home_dir
       mkdir upload
       cd upload
-      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-$git_ver-3.el8.ppc64le.rpm
-      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos/docker-ce-cli-$git_ver-3.el8.ppc64le.rpm
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-8/docker-ce-$git_ver-3.el8.ppc64le.rpm
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-8/docker-ce-cli-$git_ver-3.el8.ppc64le.rpm
       lftp -c "open -u $USER,$PASS $ftp_repo2; mirror -R ./ ./"
       cd ..
       rm -rf upload/
