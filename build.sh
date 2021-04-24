@@ -65,8 +65,8 @@ then
       cd $home_dir
       mkdir upload
       cd upload
-      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-bionic/docker-ce-cli_$git_ver~3-0~ubuntu-focal_ppc64el.deb
-      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-bionic/docker-ce_$git_ver~3-0~ubuntu-focal_ppc64el.deb
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-focal/docker-ce-cli_$git_ver~3-0~ubuntu-focal_ppc64el.deb
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-focal/docker-ce_$git_ver~3-0~ubuntu-focal_ppc64el.deb
       lftp -c "open -u $USER,$PASS $ftp_repo1; mirror -R ./ ./"
       cd ..
       rm -rf upload/
