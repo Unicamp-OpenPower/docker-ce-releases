@@ -15,7 +15,7 @@ if ([ $git_ver != $ftp_ver ] && [ $git_ver == $moby_ver ]) || [ -f "${sys}.txt" 
 then
     
     echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
-    sudo apt-get -y install make
+    #sudo apt-get -y install make
     #sudo printf "deb https://oplab9.parqtec.unicamp.br/pub/repository/debian/ ./\n" >> /etc/apt/sources.list
     #wget https://oplab9.parqtec.unicamp.br/pub/key/openpower-gpgkey-public.asc
     #sudo apt-key add openpower-gpgkey-public.asc
