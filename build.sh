@@ -28,13 +28,13 @@ then
     git clone https://github.com/docker/docker-ce-packaging.git
     
     wget https://github.com/docker/cli/archive/refs/tags/v$git_ver.zip
+    mv v$git_ver.zip cli.zip
+
     wget https://github.com/moby/moby/archive/refs/tags/v$git_ver.zip
+    mv v$git_ver.zip moby.zip
 
-    unzip cli-$git_ver.zip
-    unzip moby-$git_ver.zip
-
-    mv cli-$git_ver cli
-    mv moby-$git_ver moby
+    unzip cli.zip
+    unzip moby.zip
 
     #cd $home_dir/cli
     #git checkout v$git_ver
