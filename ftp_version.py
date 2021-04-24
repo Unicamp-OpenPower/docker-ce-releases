@@ -50,7 +50,7 @@ if (not 'ubuntu-bionic' in html):
     file.writelines(ftp_ver)
     file.close()
 if (not 'debian-buster' in html):
-    file = open('ubuntu-buster.txt', 'w')
+    file = open('debian-buster.txt', 'w')
     file.writelines(ftp_ver)
     file.close()
 if (not 'centos-8' in html):
