@@ -31,7 +31,7 @@ with open('docker-ce-packaging/rpm/gen-rpm-ver', "r") as version_set:
     for line in version_set:
         if i == 45:
             copy = line.split(' ')
-            copy[3] = '!='
+            copy[6] = '&&'
             newlines.append(' '.join(copy))
         else:
             newlines.append(line)
