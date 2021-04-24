@@ -20,6 +20,7 @@ def get_info(path, regex, name, cut=(lambda x : x)):
     file = open(name+'.txt', 'w')
     file.writelines(latest)
     file.close()
+    return(latest)
 
 # Define the FTP URL for downloading and uploading packages
 ftp_path = 'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker'
@@ -27,24 +28,16 @@ git_path = 'https://github.com/docker/cli/releases/latest'
 moby_path = 'https://github.com/moby/moby/releases/latest'
 
 # find and save the current Github release
-get_info(git_path, 'v\d\d\.\d\d\.\d+', 'github_version', cut=(lambda x : x[1:]))
-get_info(moby_path, 'v\d\d\.\d\d\.\d+', 'moby_version', cut=(lambda x : x[1:]))
+git_ver = get_info(git_path, 'v\d\d\.\d\d\.\d+', 'github_version', cut=(lambda x : x[1:]))
+moby_ver = get_info(moby_path, 'v\d\d\.\d\d\.\d+', 'moby_version', cut=(lambda x : x[1:]))
 
 # find and save the current Docker version on FTP server
-get_info(ftp_path, '\d\d\.\d\d\.\d+', 'ftp_version')
-
-# Find last version on FTP
-html = str(
-    requests.get(
-        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/'
-    ).content)
-index = html.rfind('version-')
-ftp_version = html[index + 8:index + 18].replace('<', '').replace(' ', '').replace('//', '')
+ftp_ver = get_info(ftp_path, '\d\d\.\d\d\.\d+', 'ftp_version')
 
 # Find if there are already the builds for each system
 html = str(
     requests.get(
-        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-' + ftp_version 
+        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-' + git_ver
     ).content)
 
 # Create a file if there isn't a build
