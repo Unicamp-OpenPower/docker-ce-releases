@@ -43,21 +43,21 @@ html = str(
 # Create a file if there isn't a build
 if (not 'ubuntu-focal' in html):
     file = open('ubuntu-focal.txt', 'w')
-    file.writelines(ftp_version)
+    file.writelines(ftp_ver)
     file.close()
 if (not 'ubuntu-bionic' in html):
     file = open('ubuntu-bionic.txt', 'w')
-    file.writelines(ftp_version)
+    file.writelines(ftp_ver)
     file.close()
 if (not 'debian-buster' in html):
     file = open('ubuntu-buster.txt', 'w')
-    file.writelines(ftp_version)
+    file.writelines(ftp_ver)
     file.close()
 if (not 'centos-8' in html):
     file = open('centos-8.txt', 'w')
-    file.writelines(ftp_version)
+    file.writelines(ftp_ver)
     file.close()
 if (not 'centos-7' in html):
     file = open('centos-7.txt', 'w')
-    file.writelines(ftp_version)
+    file.writelines(ftp_ver)
     file.close()
