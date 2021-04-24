@@ -36,6 +36,9 @@ then
     unzip cli.zip
     unzip moby.zip
 
+    mv cli-$git_ver cli
+    mv moby-$git_ver moby
+
     #cd $home_dir/cli
     #git checkout v$git_ver
     #cd $home_dir
