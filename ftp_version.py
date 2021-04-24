@@ -1,3 +1,4 @@
+import requests
 import urllib.request as request
 from re import findall
 
@@ -31,8 +32,6 @@ get_info(moby_path, 'v\d\d\.\d\d\.\d+', 'moby_version', cut=(lambda x : x[1:]))
 
 # find and save the current Docker version on FTP server
 get_info(ftp_path, '\d\d\.\d\d\.\d+', 'ftp_version')
-
-import requests
 
 # Find last version on FTP
 html = str(
