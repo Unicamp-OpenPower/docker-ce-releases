@@ -8,10 +8,6 @@ home_dir=$(pwd)
 git_ver=$(cat github_version.txt)
 moby_ver=$(cat moby_version.txt)
 ftp_ver=$(cat ftp_version.txt)
-
-git_ver="19.03.14"
-moby_ver="19.03.14"
-ftp_ver="19.03.3"
 # del_version=$(cat delete_version.txt)
 
 echo "=========> [CHECKING IF BUILD EXISTS] >>> "
