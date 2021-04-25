@@ -37,7 +37,7 @@ ftp_ver = get_info(ftp_path, '\d\d\.\d\d\.\d+', 'ftp_version')
 # Find if there are already the builds for each system
 html = str(
     requests.get(
-        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-' + '20.10.05' #git_ver
+        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-' + '20.10.5' #git_ver
     ).content)
 
 # Create a file if there isn't a build
