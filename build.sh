@@ -9,9 +9,9 @@ git_ver=$(cat github_version.txt)
 moby_ver=$(cat moby_version.txt)
 ftp_ver=$(cat ftp_version.txt)
 
-git_ver="20.10.2"
-moby_ver="20.10.2"
-ftp_ver="20.10.1"
+git_ver="20.10.1"
+moby_ver="20.10.1"
+ftp_ver="20.10.0"
 # del_version=$(cat delete_version.txt)
 
 echo "=========> [CHECKING IF BUILD EXISTS] >>> "
