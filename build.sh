@@ -63,6 +63,7 @@ then
       cd upload
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-focal/docker-ce-cli_$git_ver~3-0~ubuntu-focal_ppc64el.deb
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-focal/docker-ce_$git_ver~3-0~ubuntu-focal_ppc64el.deb
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/ubuntu-focal/docker-ce-rootless-extras_$git_ver~3-0~ubuntu-focal_ppc64el.deb
       lftp -c "open -u $USER,$PASS $ftp_repo1; mirror -R ./ ./"
       cd ..
       rm -rf upload/
@@ -75,6 +76,7 @@ then
       cd upload
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-7/docker-ce-$git_ver-3.el7.ppc64le.rpm
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-7/docker-ce-cli-$git_ver-3.el7.ppc64le.rpm
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-7/docker-ce-rootless-extras-$git_ver-3.el7.ppc64le.rpm
       lftp -c "open -u $USER,$PASS $ftp_repo2; mirror -R ./ ./"
       cd ..
       rm -rf upload/
@@ -87,6 +89,7 @@ then
       cd upload
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-8/docker-ce-$git_ver-3.el8.ppc64le.rpm
       wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-8/docker-ce-cli-$git_ver-3.el8.ppc64le.rpm
+      wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-$git_ver/centos-8/docker-ce-rootless-extras-$git_ver-3.el8.ppc64le.rpm
       lftp -c "open -u $USER,$PASS $ftp_repo2; mirror -R ./ ./"
       cd ..
       rm -rf upload/
