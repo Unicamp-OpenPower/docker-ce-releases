@@ -6,13 +6,13 @@ url="https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker"
 
 home_dir=$(pwd)
 git_ver=$(cat github_version.txt)
-moby_ver=$(cat moby_version.txt)
+#moby_ver=$(cat moby_version.txt)
 ftp_ver=$(cat ftp_version.txt)
 # del_version=$(cat delete_version.txt)
 
 echo "=========> [CHECKING IF BUILD EXISTS] >>> "
-#if ([ $git_ver != $ftp_ver ] && [ $git_ver == $moby_ver ]) || [ -f "${sys}.txt" ]
-if [ -f "${sys}.txt" ]
+if [ $git_ver != $ftp_ver ]
+#if [ -f "${sys}.txt" ]
 then
     
     echo "=========> [CLONNING <$git_ver> AND PATCHING] >>>"
