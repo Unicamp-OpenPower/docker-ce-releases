@@ -24,40 +24,12 @@ def get_info(path, regex, name, cut=(lambda x : x)):
 
 # Define the FTP URL for downloading and uploading packages
 ftp_path = 'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker'
-git_path = 'https://github.com/docker/cli/releases/latest'
-moby_path = 'https://github.com/moby/moby/releases/latest'
+#cli_path = 'https://github.com/docker/cli/releases/latest'
+git_path = 'https://github.com/moby/moby/releases/latest'
 
 # find and save the current Github release
+#cli_ver = get_info(cli_path, 'v\d\d\.\d\d\.\d+', 'cli_version', cut=(lambda x : x[1:]))
 git_ver = get_info(git_path, 'v\d\d\.\d\d\.\d+', 'github_version', cut=(lambda x : x[1:]))
-moby_ver = get_info(moby_path, 'v\d\d\.\d\d\.\d+', 'moby_version', cut=(lambda x : x[1:]))
 
 # find and save the current Docker version on FTP server
 ftp_ver = get_info(ftp_path, '\d\d\.\d\d\.\d+', 'ftp_version')
-
-# Find if there are already the builds for each system
-html = str(
-    requests.get(
-        'https://oplab9.parqtec.unicamp.br/pub/ppc64el/docker/version-' + git_ver
-    ).content)
-
-# Create a file if there isn't a build
-if (not 'ubuntu-focal' in html):
-    file = open('ubuntu-focal.txt', 'w')
-    file.writelines(ftp_ver)
-    file.close()
-if (not 'ubuntu-bionic' in html):
-    file = open('ubuntu-bionic.txt', 'w')
-    file.writelines(ftp_ver)
-    file.close()
-if (not 'debian-buster' in html):
-    file = open('debian-buster.txt', 'w')
-    file.writelines(ftp_ver)
-    file.close()
-if (not 'centos-8' in html):
-    file = open('centos-8.txt', 'w')
-    file.writelines(ftp_ver)
-    file.close()
-if (not 'centos-7' in html):
-    file = open('centos-7.txt', 'w')
-    file.writelines(ftp_ver)
-    file.close()
